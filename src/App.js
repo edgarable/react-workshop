@@ -11,13 +11,21 @@ function App() {
     setTodoItems(todoItems.concat(todo));
   };
 
+  const updateTodo = (updatedTodo) => {
+    const updatedTodoList = todoItems.map((item) => {
+      return item.id === updatedTodo.id ? updatedTodo : item;
+    });
+
+    setTodoItems(updatedTodoList);
+  };
+
   return (
     <div className="App">
       <h1>My App</h1>
       <TodoForm addTodo={addTodo} />
       <div className="list-container">
-        <TodoList itemList={todoItems} />
-        <DoneList itemList={todoItems} />
+        <TodoList itemList={todoItems} updateTodo={updateTodo} />
+        <DoneList itemList={todoItems} updateTodo={updateTodo} />
       </div>
     </div>
   );
