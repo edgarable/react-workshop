@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import uuid from "uuid";
 
-export default function TodoForm() {
+export default function TodoForm({ addTodo }) {
+  const [todoItem, setTodoItem] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("HOLA!!!");
+    addTodo({ name: todoItem, id: uuid(), completed: false });
+    setTodoItem("");
   };
+
+  const handleOnChange = (event) => {
+    setTodoItem(event.target.value);
+  };
+
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" />
+      <input type="text" onChange={handleOnChange} value={todoItem} />
       <button>Agregar</button>
     </form>
   );
